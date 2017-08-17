@@ -1,12 +1,16 @@
+# vim:set ft=dockerfile:
 FROM debian:jessie
 
-MAINTAINER Andrea Usuelli <andreausu@gmail.com>
+MAINTAINER Guillaume Lefranc <guillaume@signal18.io>
+
+ENV PROXYSQL_MAJOR 1.3
+ENV PROXYSQL_VERSION 1.3.9
 
 RUN apt-get update && \
-    apt-get install -y wget && \
-    wget https://github.com/sysown/proxysql/releases/download/1.3.0f/proxysql_1.3.0f-debian8_amd64.deb -O /opt/proxysql_1.3.0f-debian8_amd64.deb && \
-    dpkg -i /opt/proxysql_1.3.0f-debian8_amd64.deb && \
-    rm -f /opt/proxysql_1.3.0f-debian8_amd64.deb && \
+    apt-get install -y curl && \
+    curl -sLO https://github.com/sysown/proxysql/releases/download/v$PROXYSQL_VERSION/proxysql_$PROXYSQL_VERSION-debian8_amd64.deb && \
+    dpkg -i proxysql_$PROXYSQL_VERSION-debian8_amd64.deb && \
+    rm -f proxysql_$PROXYSQL_VERSION-debian8_amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["proxysql", "-f"]
+CMD ["proxysql", "-f"]
