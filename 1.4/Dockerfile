@@ -4,7 +4,7 @@ FROM debian:jessie
 MAINTAINER Guillaume Lefranc <guillaume@signal18.io>
 
 ENV PROXYSQL_MAJOR 1.4
-ENV PROXYSQL_VERSION 1.4.1
+ENV PROXYSQL_VERSION 1.4.2
 
 RUN apt-get update && \
     apt-get install -y curl && \
